@@ -10,6 +10,13 @@ const port = process.env.PORT || 8000;
 app.use(express.json());
 app.use(cors());
 
+mongoose
+  .connect(process.env.DB, {})
+  .then(() => {
+    console.log("connected successfully!");
+  })
+  .catch((error) => console.log(error));
+
 routers(app);
 
 app.listen(port, () => {
