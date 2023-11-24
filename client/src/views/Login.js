@@ -2,29 +2,34 @@ import React, { useState } from "react";
 import "../assets/styles/Login.scss";
 import BackgroundImages from "../components/BackgroundImages";
 import Header from "../components/Header";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [formValue, setFormValue] = useState({
-    email: "",
-    password: "",
-  });
-  const { email, password } = formValue;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleOnChangeLogin = (e) => {
-    setFormValue({ ...formValue, [e.target.name]: e.target.value });
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(firebaseAuth, email, password);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleEnterLogin = (e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
   };
+
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (currentUser) {
+      navigate("/");
+    }
+  });
 
   return (
     <div className="login">
@@ -40,18 +45,20 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Email address"
-                name="email"
                 value={email}
-                onChange={handleOnChangeLogin}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
                 placeholder="Password"
-                onChange={handleOnChangeLogin}
-                name="password"
+                onChange={(e) => setPassword(e.target.value)}
                 value={password}
+                onKeyDown={handleEnterLogin}
               />
-              <button className="btn-login" onClick={handleLogin}>
+              <button
+                className="btn-login"
+                onClick={handleLogin}
+                onKeyDown={handleEnterLogin}>
                 Login
               </button>
             </div>

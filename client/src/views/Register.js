@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,13 +23,37 @@ const Register = () => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
+  const handleShowPassword = () => {
+    if (!email) {
+      toast.warning("Enter email!");
+      setShowPassword(false);
+    } else {
+      setShowPassword(true);
+    }
+  };
+
+  const handleEnterShowPassword = (e) => {
+    if (e.key === "Enter") {
+      handleShowPassword();
+    }
+  };
+
+  const handleRegister = async () => {
+    if (password.length < 6) {
+      return toast.error("Password must have at least 6 characters");
+    }
     try {
-      console.log(formValue);
       await createUserWithEmailAndPassword(firebaseAuth, email, password);
     } catch (error) {
       console.log(error);
+    }
+
+    console.log(formValue);
+  };
+
+  const handleEnterRegister = (e) => {
+    if (e.key === "Enter") {
+      handleRegister();
     }
   };
 
@@ -58,6 +83,7 @@ const Register = () => {
               name="email"
               value={email}
               onChange={handleOnChangeRegister}
+              onKeyDown={handleEnterShowPassword}
             />
             {showPassword && (
               <input
@@ -66,18 +92,20 @@ const Register = () => {
                 onChange={handleOnChangeRegister}
                 name="password"
                 value={password}
+                onKeyDown={handleEnterRegister}
               />
             )}
             {!showPassword && (
-              <button
-                className="btn-started"
-                onClick={() => setShowPassword(true)}>
+              <button className="btn-started" onClick={handleShowPassword}>
                 Get Started
               </button>
             )}
           </div>
           {showPassword && (
-            <button className="btn-login" onClick={handleRegister}>
+            <button
+              className="btn-login"
+              onClick={handleRegister}
+              onKeyDown={handleEnterRegister}>
               Sign Up
             </button>
           )}
