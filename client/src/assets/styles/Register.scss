@@ -1,0 +1,73 @@
+.register {
+  position: relative;
+
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    width: 100vw;
+    color: white;
+    display: grid;
+    grid-template-rows: 15% 85%;
+
+    .body-register {
+      gap: 1rem;
+
+      .text {
+        gap: 1rem;
+        text-align: center;
+        font-size: 2rem;
+
+        h1 {
+          padding: 0 5rem;
+        }
+
+        h6 {
+          padding: 0 5rem;
+        }
+      }
+
+      .form {
+        display: grid;
+        width: 40%;
+        gap: 0.5rem;
+
+        input {
+          color: black;
+          border: none;
+          padding: 1rem;
+          font-size: 1.2rem;
+          border-radius: 5px;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        .btn-started {
+          padding: 0.5rem 1rem;
+          background-color: #e50914;
+          cursor: pointer;
+          border: none;
+          color: white;
+          border-radius: 0.2rem;
+          font-weight: bolder;
+          font-size: 1.1rem;
+        }
+      }
+
+      .btn-login {
+        padding: 0.5rem 1rem;
+        background-color: #e50914;
+        cursor: pointer;
+        border: none;
+        color: white;
+        border-radius: 0.2rem;
+        font-weight: bolder;
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
