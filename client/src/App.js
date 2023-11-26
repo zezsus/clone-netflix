@@ -3,6 +3,7 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import Home from "./views/Home";
 import { ToastContainer } from "react-toastify";
+import Playser from "./views/Playser";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/player" element={<Playser />} />
         <Route path="/" element={<Home />} />
       </Routes>
       <ToastContainer

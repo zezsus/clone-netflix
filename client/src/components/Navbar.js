@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import "../assets/styles/Navbar.scss";
 import logo from "../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
-import { IoIosLogOut } from "react-icons/io";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
+import icons from "../utils/icons";
 
 const Navbar = ({ isScrolled }) => {
   const links = [
@@ -15,6 +14,8 @@ const Navbar = ({ isScrolled }) => {
     { name: "My List", link: "/mylist" },
   ];
 
+  const { FaSearch, IoIosLogOut } = icons;
+
   const [showSearch, setShowSearch] = useState(false);
 
   const navigate = useNavigate();
@@ -22,12 +23,11 @@ const Navbar = ({ isScrolled }) => {
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (!currentUser) {
       navigate("/login");
-      console.log(currentUser);
     }
   });
 
   return (
-    <div className="navbar">
+    <div className="navbar-netflix">
       <nav className={`d-flex ${isScrolled ? "scrolled" : ""}`}>
         <div className="nav-left ">
           <div className="brand">

@@ -6,13 +6,15 @@ nav {
   display: flex;
   position: sticky;
   top: 0;
-  height: 5rem;
+  height: 5rem !important;
   width: 100%;
   justify-content: space-between;
   position: fixed;
   top: 0;
   padding: 0 2rem;
   align-items: center;
+  z-index: 2;
+  transition: 0.3s ease-in-out;
 
   .nav-left {
     gap: 2rem;
