@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import "../assets/styles/Home.scss";
 import Navbar from "../components/Navbar";
 import backgroundImages from "../assets/images/home.jpg";
 import movieLogo from "../assets/images/homeTitle.webp";
 import icons from "../utils/icons";
 import { useNavigate } from "react-router-dom";
+import { getGenres } from "../store";
 
 const Home = () => {
-  const navigate = useNavigate();
-
   const { FaPlay, AiOutlineInfoCircle } = icons;
 
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getGenres());
+  }, []);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
