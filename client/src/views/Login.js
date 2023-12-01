@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../assets/styles/Login.scss";
+import "../assets/styles/styles-views/Login.scss";
 import BackgroundImages from "../components/BackgroundImages";
 import Header from "../components/Header";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";

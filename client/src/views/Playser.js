@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/styles/Player.scss";
+import "../assets/styles/styles-views/Player.scss";
 import icons from "../utils/icons";
 import { useNavigate } from "react-router-dom";
 import video from "../assets/images/video.mp4";

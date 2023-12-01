@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import "../assets/styles/Home.scss";
+import { useDispatch, useSelector } from "react-redux";
+import "../assets/styles/styles-views/Home.scss";
 import Navbar from "../components/Navbar";
 import backgroundImages from "../assets/images/home.jpg";
 import movieLogo from "../assets/images/homeTitle.webp";
 import icons from "../utils/icons";
 import { useNavigate } from "react-router-dom";
-import { getGenres } from "../store";
+import { fetchMovies, getGenres } from "../store";
+import Slider from "../components/Slider";
 
 const Home = () => {
   const { FaPlay, AiOutlineInfoCircle } = icons;
 
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const navigate = useNavigate();
+  const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
+  const movies = useSelector((state) => state.netflix.movies);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getGenres());
   }, []);
+
+  useEffect(() => {
+    if (genresLoaded) {
+      dispatch(fetchMovies({ type: "all" }));
+    }
+  }, [genresLoaded]);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
@@ -57,6 +66,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Slider movies={movies} />
     </div>
   );
 };

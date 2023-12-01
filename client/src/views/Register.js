@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../assets/styles/Register.scss";
+import "../assets/styles/styles-views/Register.scss";
 import BackgroundImages from "../components/BackgroundImages";
 import Header from "../components/Header";
 import {
