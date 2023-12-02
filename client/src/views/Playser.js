@@ -2,7 +2,7 @@ import React from "react";
 import "../assets/styles/styles-views/Player.scss";
 import icons from "../utils/icons";
 import { useNavigate } from "react-router-dom";
-import video from "../assets/images/video.mp4";
+import video from "../assets/images/video1.mp4";
 
 const Playser = () => {
   const { IoIosArrowBack } = icons;

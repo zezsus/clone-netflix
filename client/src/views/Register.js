@@ -47,8 +47,6 @@ const Register = () => {
     } catch (error) {
       console.log(error);
     }
-
-    console.log(formValue);
   };
 
   const handleEnterRegister = (e) => {

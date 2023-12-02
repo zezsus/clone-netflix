@@ -1,22 +1,14 @@
 .card-slider {
   gap: 1rem;
   position: relative;
-  padding: 2rem 0;
-
-  h2 {
-    margin-left: 10px;
-  }
 
   .wrapper {
     overflow-x: scroll;
     overflow-y: hidden;
-    height: 350px;
-    display: flex;
-    align-items: center;
-    padding-top: 0;
+    height: max-content;
 
     &::-webkit-scrollbar {
-      height: 0.2rem;
+      height: 0.4rem;
       &-thumb {
         background-color: #ffffff39;
         width: 0.1rem;
@@ -24,13 +16,20 @@
       }
     }
 
+    h2 {
+      margin-left: 10px;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
     .card-slider-container {
       width: max-content;
-      gap: 1rem;
+      gap: 2rem;
       transform: translateX(0px);
       transition: 0.3s ease-in-out;
-      margin-left: 10px;
-      padding-right: 10px;
+      margin-left: 60px;
+      padding-right: 60px;
+      padding-bottom: 3rem;
     }
   }
 }

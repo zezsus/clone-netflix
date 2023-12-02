@@ -17,7 +17,6 @@ export const getGenres = createAsyncThunk("netflix/genres", async () => {
     const { data } = await axios.get(
       `${TMDB_BASE_URL}/genre/movie/list?api_key=${apiKey}`
     );
-    console.log("data genres: ", data);
     return data.genres;
   } catch (error) {
     console.log(error);
@@ -25,8 +24,6 @@ export const getGenres = createAsyncThunk("netflix/genres", async () => {
 });
 
 const createArrayFromRawData = (array, moviesArray, genres) => {
-  console.log("array: ", array);
-
   array.forEach((movie) => {
     const movieGenres = [];
     movie.genre_ids.forEach((genre) => {
@@ -48,16 +45,16 @@ const createArrayFromRawData = (array, moviesArray, genres) => {
 };
 
 const getRawData = async (api, genres, paging) => {
-  const moviesArray = [];
-  for (let i = 1; i < 10 && moviesArray < 60; i++) {
-    try {
+  try {
+    const moviesArray = [];
+    for (let i = 1; moviesArray.length < 60 && i < 10; i++) {
       const { data } = await axios.get(`${api}${paging ? `&page=${i}` : ""}`);
-
       createArrayFromRawData(data.results, moviesArray, genres);
-      return moviesArray;
-    } catch (error) {
-      console.log(error);
     }
+
+    return moviesArray;
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -74,7 +71,6 @@ export const fetchMovies = createAsyncThunk(
         true
       );
 
-      console.log("data Movies: ", data);
       return data;
     } catch (error) {
       console.log(error);
