@@ -3,42 +3,34 @@
   position: relative;
   padding: 2rem 0;
 
-  h1 {
-    margin-left: 50px;
+  h2 {
+    margin-left: 10px;
   }
 
   .wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+
+    &::-webkit-scrollbar {
+      height: 0.2rem;
+      &-thumb {
+        background-color: #ffffff39;
+        width: 0.1rem;
+        border-radius: 1rem;
+      }
+    }
+
     .card-slider-container {
       width: max-content;
       gap: 1rem;
       transform: translateX(0px);
       transition: 0.3s ease-in-out;
-      margin-left: 50px;
-    }
-
-    .slider-action {
-      position: absolute;
-      z-index: 99;
-      height: 100%;
-      top: 0;
-      bottom: 0;
-      width: 50px;
-      transition: 0.3s ease-in-out;
-      svg {
-        font-size: 1.5rem;
-      }
-    }
-
-    .none {
-      display: none !important;
-    }
-
-    .left {
-      left: 0;
-    }
-
-    .right {
-      right: 0;
+      margin-left: 10px;
+      padding-right: 10px;
     }
   }
 }
