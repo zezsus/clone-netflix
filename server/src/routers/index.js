@@ -1,7 +1,7 @@
-const authRouter = require("./authRouter");
+const userRouter = require("./UserRouter");
 
 const routers = (app) => {
-  app.use("/api/auth", authRouter);
+  app.use("/api/user", userRouter);
 };
 
 module.exports = routers;

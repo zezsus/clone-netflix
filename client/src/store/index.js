@@ -5,7 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import { TMDB_BASE_URL, apiKey } from "../utils/constants";
 import axios from "axios";
-
+import { deleteLikedRouter, getLikedRouter } from "../utils/apiRouter";
 const initialState = {
   movies: [],
   genresLoaded: false,
@@ -89,8 +89,35 @@ export const fetchDataByGenre = createAsyncThunk(
         `${TMDB_BASE_URL}/discover/${type}?api_key=${apiKey}&with_genres=${genre}`,
         genres
       );
-      console.log(genre);
       return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const getUserLikedMovies = createAsyncThunk(
+  "netflix/getLiked",
+  async (email) => {
+    try {
+      const data = await axios.get(`${getLikedRouter}/${email}`);
+      return data.data.movies;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const deleteUserLikedMovies = createAsyncThunk(
+  "netflix/deleteLiked",
+  async ({ email, movieId }) => {
+    try {
+      const data = await axios.put(`${deleteLikedRouter}`, {
+        email,
+        movieId,
+      });
+      console.log(data);
+      return data.data.likedMovies;
     } catch (error) {
       console.log(error);
     }
@@ -112,6 +139,15 @@ const netflixSlice = createSlice({
 
     builder.addCase(fetchDataByGenre.fulfilled, (state, action) => {
       state.movies = action.payload;
+    });
+
+    builder.addCase(getUserLikedMovies.fulfilled, (state, action) => {
+      state.movies = action.payload;
+    });
+
+    builder.addCase(deleteUserLikedMovies.fulfilled, (state, action) => {
+      state.movies = action.payload;
+      console.log(state.movies);
     });
   },
 });

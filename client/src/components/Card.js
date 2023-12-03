@@ -3,6 +3,12 @@ import "../assets/styles/styles-components/Card.scss";
 import { useNavigate } from "react-router-dom";
 import video from "../assets/images/video1.mp4";
 import icons from "../utils/icons";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "../utils/firebase-config";
+import axios from "axios";
+import { addRouter } from "../utils/apiRouter";
+import { useDispatch } from "react-redux";
+import { deleteUserLikedMovies } from "../store";
 
 const Card = ({ movieData, index, isLiked = false }) => {
   const {
@@ -15,8 +21,34 @@ const Card = ({ movieData, index, isLiked = false }) => {
   } = icons;
 
   const [isHover, setIsHover] = useState(false);
+  const [email, setEmail] = useState(undefined);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (currentUser) {
+      setEmail(currentUser.email);
+    } else {
+      navigate("/login");
+    }
+  });
+
+  const addToList = async () => {
+    try {
+      await axios.post(`${addRouter}`, { email, data: movieData });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteToList = () => {
+    dispatch(
+      deleteUserLikedMovies({
+        email,
+        movieId: movieData.id,
+      })
+    );
+  };
   return (
     <div
       className="card"
@@ -56,15 +88,15 @@ const Card = ({ movieData, index, isLiked = false }) => {
             <div className="icons d-flex justify-content-between">
               <div className="controls d-flex">
                 <FaPlayCircle
-                  title="play"
+                  title="Play"
                   onClick={() => navigate("/player")}
                 />
                 <RiThumbUpFill title="Like" />
                 <RiThumbDownFill title="Dislike" />
                 {isLiked ? (
-                  <BsCheck title="Remove From List" />
+                  <BsCheck title="Remove From List" onClick={deleteToList} />
                 ) : (
-                  <AiOutlinePlus title="Add to  my list" />
+                  <AiOutlinePlus title="Add to  my list" onClick={addToList} />
                 )}
               </div>
 

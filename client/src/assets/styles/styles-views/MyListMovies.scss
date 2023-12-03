@@ -1,0 +1,17 @@
+.my-list-movies {
+  .content {
+    margin: 2.3rem;
+    margin-top: 8rem;
+    gap: 3rem;
+
+    h1 {
+      margin-left: 3rem;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+}
