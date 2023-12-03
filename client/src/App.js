@@ -5,6 +5,8 @@ import Home from "./views/Home";
 import { ToastContainer } from "react-toastify";
 import Playser from "./views/Playser";
 import Movies from "./views/Movies";
+import TVShow from "./views/TVShow";
+import MyListMovies from "./views/MyListMovies";
 
 function App() {
   return (
@@ -13,7 +15,9 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/player" element={<Playser />} />
+        <Route exact path="/tv" element={<TVShow />} />
         <Route exact path="/movies" element={<Movies />} />
+        <Route exact path="/mylist" element={<MyListMovies />} />
         <Route exact path="/" element={<Home />} />
       </Routes>
       <ToastContainer

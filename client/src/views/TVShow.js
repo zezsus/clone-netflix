@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import "../assets/styles/styles-views/Movies.scss";
+import Navbar from "../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchMovies, getGenres } from "../store";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
-import Navbar from "../components/Navbar";
+import SelectGenre from "../components/SelectGenre";
 import Slider from "../components/Slider";
 import NotAvailable from "../components/NotAvailable";
-import SelectGenre from "../components/SelectGenre";
+import "../assets/styles/styles-views/TVShow.scss";
 
-const Movies = () => {
+const TVShow = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
@@ -26,7 +26,7 @@ const Movies = () => {
 
   useEffect(() => {
     if (genresLoaded) {
-      dispatch(fetchMovies({ type: "movie" }));
+      dispatch(fetchMovies({ type: "tv" }));
     }
   }, [genresLoaded]);
 
@@ -44,17 +44,17 @@ const Movies = () => {
   });
 
   return (
-    <div className="movies">
+    <div className="tv-show">
       <div className="navbar">
         <Navbar isScrolled={isScrolled} />
       </div>
 
       <div className="data">
-        <SelectGenre genres={genres} type="movie" />
+        <SelectGenre genres={genres} type="tv" />
         {movies.length > 0 ? <Slider movies={movies} /> : <NotAvailable />}
       </div>
     </div>
   );
 };
 
-export default Movies;
+export default TVShow;

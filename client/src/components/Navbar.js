@@ -31,7 +31,14 @@ const Navbar = ({ isScrolled }) => {
       <nav className={`d-flex ${isScrolled ? "scrolled" : ""}`}>
         <div className="nav-left ">
           <div className="brand">
-            <img src={logo} className="card-img-top" alt="logo" />
+            <img
+              src={logo}
+              className="card-img-top"
+              alt="logo"
+              onClick={() => {
+                navigate("/");
+              }}
+            />
             <ul className="links d-flex">
               {links.map((items) => {
                 return (
