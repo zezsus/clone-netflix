@@ -2,24 +2,27 @@
   gap: 1rem;
   position: relative;
 
+  h2 {
+    position: relative;
+    margin-left: 50px;
+    top: 4.5rem;
+  }
+
   .wrapper {
     overflow-x: scroll;
     overflow-y: hidden;
     height: max-content;
+    padding-top: 3rem;
+    margin-bottom: 10px;
 
     &::-webkit-scrollbar {
-      height: 0.4rem;
+      height: 0.3rem;
+
       &-thumb {
         background-color: #ffffff39;
         width: 0.1rem;
         border-radius: 1rem;
       }
-    }
-
-    h2 {
-      margin-left: 10px;
-      padding-top: 3rem;
-      padding-bottom: 3rem;
     }
 
     .card-slider-container {
@@ -30,6 +33,7 @@
       margin-left: 60px;
       padding-right: 60px;
       padding-bottom: 3rem;
+      padding-top: 4rem;
     }
   }
 }

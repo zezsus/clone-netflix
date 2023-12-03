@@ -4,15 +4,17 @@ import Register from "./views/Register";
 import Home from "./views/Home";
 import { ToastContainer } from "react-toastify";
 import Playser from "./views/Playser";
+import Movies from "./views/Movies";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/player" element={<Playser />} />
-        <Route path="/" element={<Home />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/player" element={<Playser />} />
+        <Route exact path="/movies" element={<Movies />} />
+        <Route exact path="/" element={<Home />} />
       </Routes>
       <ToastContainer
         position="top-right"
